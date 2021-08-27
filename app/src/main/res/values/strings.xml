@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SSOP</string>
+    <string name="img_Desc">Loading Image</string>
+    <string name="txt_Loading">Loading...</string>
+</resources>

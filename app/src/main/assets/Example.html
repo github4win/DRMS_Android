@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <script language="JavaScript">
+            function setMessage(arg)
+            {
+                var mainFrame = document.getElementById('textMessageFromApp');
+                var createFrame = document.createElement("div");
+                createFrame.innerHTML = arg;
+                mainFrame.appendChild(createFrame);
+            }
+
+            function callAndroid()
+            {
+<!--                var str1 = "QR_CODE";-->
+<!--                var str = myFrm.mytxt.value;-->
+                window.myJs.callAndroid('QR');
+                return false;
+            }
+        </script>
+    </head>
+    <body>
+        <hr style="border: solid 3px red"/>
+        <h2>WebView와의 통신</h2>
+        <hr/>
+        <form id="myFrm" action="">
+            <input id="mytxt" type="text" value="테스트용">
+            <button onclick="callAndroid()">호출하기</button>
+        </form>
+        <br/>
+        받은 메시지 :
+        <p id="textMessageFromApp" style="height:200px; overflow-y:auto;"></p>
+        <hr/>
+    </body>
+</html>

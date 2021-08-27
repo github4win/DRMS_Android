@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "179342523907",
+    "project_id": "dsme-ssop-notification",
+    "storage_bucket": "dsme-ssop-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:179342523907:android:4573eceb1ee5e753a65836",
+        "android_client_info": {
+          "package_name": "com.example.drms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "179342523907-3jnkc8rtfp918qtbe7ogsefp0no6l4ks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drms",
+            "certificate_hash": "ef6c124a1a9fee26eb4906419050e6a8aab25bb2"
+          }
+        },
+        {
+          "client_id": "179342523907-0036jpr07o9jco320pio76upqou8bfbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxEmFgiFePxuIidojwMjOTkfN4e4ZkGGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "179342523907-0036jpr07o9jco320pio76upqou8bfbv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

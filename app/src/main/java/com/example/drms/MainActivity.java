@@ -36,6 +36,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.util.Base64;
 import android.util.Log;
@@ -50,6 +51,7 @@ import android.webkit.SslErrorHandler;
 import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -74,9 +76,9 @@ import java.lang.Object;
 public class MainActivity extends AppCompatActivity
 {
     //private static final String URL_Navigate_Url = "http://152.149.8.161:58734/";
-    private static final String URL_Navigate_Url = "http://drms_mobile2.win-it.co.kr/";
+    //private static final String URL_Navigate_Url = "http://drms_mobile2.win-it.co.kr/";
     //private static final String URL_Navigate_Url = "http://192.168.0.15:8081/";
-
+    private static final String URL_Navigate_Url = "http://192.168.200.113:8080/";
 
     String FCM_Token = ""; // Push Notification을 받기 위한 Token
     Boolean IsClickAction = false; // Notification을 클릭해서 들어오면 true
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity
                     Manifest.permission.ACCESS_FINE_LOCATION,
             };
 
-            // 권한 체크
+            // 권한 체크private static final String URL_Navigate_Url = "http://drms_mobile2.win-it.co.kr/";
             if(!hasPermissions(this, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
             }
@@ -203,7 +205,7 @@ public class MainActivity extends AppCompatActivity
                 public void onPageStarted(WebView view, String url, Bitmap favicon)
                 {
                     // 로딩 다이얼로그 시작
-                    Loading_Dialog.show();
+                   Loading_Dialog.show();
                 }
 
                 // Webview Page Loading 종료시
@@ -214,35 +216,6 @@ public class MainActivity extends AppCompatActivity
                     Loading_Dialog.dismiss();
                 }
 
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    if (url.startsWith("tel:")) {
-                        Intent call_phone = new Intent(Intent.ACTION_CALL);
-                        call_phone.setData(Uri.parse(url));
-                        startActivity(call_phone); // 권한 설정은 Loing.java에서 처리했음
-                    } else if (url.startsWith("sms:")) {
-                        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse(url));
-                        startActivity(intent);
-                    } else if (url.startsWith("intent:")) {
-                        try {
-                            Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
-                            Intent existPackage = getPackageManager().getLaunchIntentForPackage(intent.getPackage());
-                            if (existPackage != null) {
-                                startActivity(intent);
-                            } else {
-                                Intent marketIntent = new Intent(Intent.ACTION_VIEW);
-                                marketIntent.setData(Uri.parse("market://details?id=" + intent.getPackage()));
-                                startActivity(marketIntent);
-                            }
-                            return true;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        view.loadUrl(url);
-                    }
-                    return true;
-                }
             });
 
             webView.setWebChromeClient(new WebChromeClient()
@@ -446,6 +419,13 @@ public class MainActivity extends AppCompatActivity
                     startActivityForResult(intent, 0);
                 }
             });
+        }
+
+        @JavascriptInterface
+        public void callPhone(final String number) {
+            Intent call_phone = new Intent(Intent.ACTION_CALL);
+            call_phone.setData(Uri.parse(number));
+            startActivity(call_phone); // 권한 설정은 Loing.java에서 처리했음
         }
 
         // WebView에서 FCM Token을 요청했을때 반환한다.
